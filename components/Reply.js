@@ -1,25 +1,44 @@
 import React from 'react'
-import { useState } from 'react';
-function Reply() {
+import { useState ,useContext} from 'react';
+import useAdd from './useAdd';
+import dummy from './seedData';
 
+function Reply(props) {
+
+    const {setData,replyId,toggle,setToggle} = props;
+
+    const rawData=useContext(dummy);
     const [name, setName] = useState('');
     const [comment, setComment] = useState('');
-    const [data, setData] = useState([]);
 
-    const dataHandler = (e) => {
+
+    const dataHandler = (e) => 
+    {
         e.preventDefault();
-        const arr = [...data];
-
-        arr.push({
-            Name: name,
-            Comment: comment,
-            date: new Date(),
+        const newData={
+            id:Math.floor(Math.random() * 100)+Date.now(),
+            Name:name,
+            Comment:comment,
+            data:new Date(),
             items:[]
-        })
-        setData(arr);
-        setName("");
-        setComment("");
+        }
+
+        const temp = [];
+        for(let i=0;i<rawData.length;i++){
+            temp.push(rawData[i]);
+        }
+
+       temp.forEach((container)=>{
+        useAdd(container,replyId,newData);
+       })
+
+      setData(temp);
     }
+
+    const closeHandler=()=>{
+        setToggle(!toggle);
+    }
+
   return (
     <>
         <div className='mx-auto border border-gray-300 my-3 w-[500px] bg-gray-200 '>
@@ -34,8 +53,10 @@ function Reply() {
                     </div>
 
                     <button className='bg-blue-200 w-12 my-4 rounded-md mx-2' onClick={dataHandler}>Post</button>
+                    <button className='bg-blue-200 w-12 my-4 rounded-md mx-2' onClick={closeHandler}>Close</button>
                 </div>
     </>
+    
   )
 }
 

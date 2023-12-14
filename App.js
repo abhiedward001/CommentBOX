@@ -9,8 +9,7 @@ const App = () => {
 
     return (
         <div>
-           <Comment></Comment>
-           
+           <Comment></Comment>  
         </div>
     )
 }
