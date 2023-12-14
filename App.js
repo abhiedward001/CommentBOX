@@ -5,8 +5,7 @@ import Comment from './components/Comment';
 import { useState } from 'react';
 
 const App = () => {
-   const [data,setData]=useState([]);
-
+    
     return (
         <div>
            <Comment></Comment>  

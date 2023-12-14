@@ -8,7 +8,7 @@ const useAdd = (arr, id, newData) => {
 
     if (arr.items) {
         const newVal = arr.items.map((item) => {
-            func(item, id, newData);
+            useAdd(item, id, newData);
         });
         return { ...arr, items: newVal };
     }
